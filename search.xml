@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>TypeScript笔记</title>
+    <url>/2022/10/13/TypeScript%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<p><strong>单元类型</strong></p>
+<ul>
+<li>undefined</li>
+<li>null</li>
+<li>unique symbol</li>
+<li>void</li>
+<li>字面量</li>
+<li>联合枚举成员类型</li>
+</ul>
+<p><strong>顶端类型</strong></p>
+<p>any:</p>
+<p>any 类型的变量可以接受为任何类型的值，也可以把该变量赋值给任何类型的变量</p>
+<p>unknown：</p>
+<p>unknown类型仅能够赋值给any类型和unknown类型，在程序中使用unknown类型时，必须将其细化为某种具体类型，否则会产生错误</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">\\ 错误示例</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">f1</span>(<span class="params">message: unknown</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> message.<span class="property">length</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">\\ 正确示例</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">f2</span>(<span class="params">message: unknown</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> message === <span class="string">&#x27;string&#x27;</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> message.<span class="property">length</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>尾端类型</strong></p>
+<p>never:</p>
+<p>不包含任何可能指，never类型是所以类型的子类型，它允许赋值给任何类型。never只能接受自身类型的赋值，any类型也不能赋值给它。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">f</span>(<span class="params"></span>): never &#123;</span><br><span class="line">   <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">Error</span>()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>数组</strong></p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 常规写法</span></span><br><span class="line"><span class="keyword">const</span> <span class="attr">ary</span>: number[] = [<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>]</span><br><span class="line"><span class="comment">// 多类型子元素写法</span></span><br><span class="line"><span class="keyword">const</span> <span class="attr">ary</span>: (string|number)[] = [<span class="string">&#x27;f&#x27;</span>, <span class="number">1</span>, <span class="number">2</span>]</span><br><span class="line"><span class="comment">// 泛型数组写法</span></span><br><span class="line"><span class="keyword">const</span> <span class="attr">ary</span>: <span class="title class_">Array</span>&lt;number&gt; = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line"><span class="keyword">const</span> <span class="attr">ary</span>: <span class="title class_">Array</span>&lt;string|number&gt; = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line"><span class="comment">// 对象数组写法</span></span><br><span class="line"><span class="keyword">const</span> <span class="attr">ary</span>: <span class="title class_">Array</span>&lt;&#123;<span class="attr">x</span>: number; <span class="attr">y</span>: number&#125;&gt;</span><br><span class="line"><span class="comment">// 只读数组</span></span><br><span class="line"><span class="keyword">const</span> <span class="attr">ary</span>: <span class="title class_">ReadonlyArray</span>&lt;number&gt; = [<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>]</span><br><span class="line"><span class="keyword">const</span> <span class="attr">ary</span>: readonly number[] = [<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>]</span><br></pre></td></tr></table></figure>
+
+<p><strong>元组</strong></p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 不确定数量元组</span></span><br><span class="line"><span class="keyword">const</span> <span class="attr">tuple</span>: [number, ...string[]] = [<span class="number">1</span>, <span class="string">&#x27;2&#x27;</span>, <span class="string">&#x27;3&#x27;</span>]</span><br></pre></td></tr></table></figure>
+
+<p><strong>对象</strong></p>
+<p>object类型的变量除了undefined和null值外，其他任何值都可以赋值给该类型变量（当在原始值上调用某个方法时，JavaScript会对原始值执行封箱操作，将其转换为对象类型，然后再调用相应方法）</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="attr">obj</span>: object = &#123; <span class="attr">name</span>: <span class="string">&#x27;张三&#x27;</span>, <span class="attr">age</span>: <span class="number">24</span>, <span class="attr">foo</span>: <span class="string">&#x27;测试&#x27;</span> &#125;</span><br></pre></td></tr></table></figure>
+
+<p>object类型不允许读取和修改object类型上的自定义属性</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">obj.<span class="property">foo</span> &amp;&amp; obj.<span class="property">foo</span> = <span class="number">1</span> <span class="comment">// 都会报错</span></span><br></pre></td></tr></table></figure>
+
+<p>object类型的变量能赋值给以下三种类型</p>
+<ul>
+<li>any和unknown</li>
+<li>Object类型</li>
+<li>空对象类型字面量 ‘{}’</li>
+</ul>
+<p>对象可选属性</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="title class_">PropertyName</span>?: <span class="title class_">Type</span> === <span class="title class_">PropertyName</span>?: <span class="title class_">Type</span> || <span class="literal">undefined</span></span><br></pre></td></tr></table></figure>
+
+<p>只读属性</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">readonly PropertyName: Type</span><br></pre></td></tr></table></figure>
+
+<p>字面量定义对象类型</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="attr">obj</span>: &#123;&#125; = &#123;<span class="attr">foo</span>: <span class="string">&#x27;测试&#x27;</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>函数</strong></p>
+<p>函数的可选参数必须位于函数参数列表的尾部，可选参数之后不允许再出现必选参数，否则将产生编译错误</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">add</span>(<span class="params">x: number, y: number</span>) &#123;&#125;</span><br><span class="line"><span class="comment">// 错误示例</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">add</span>(<span class="params">x?: unmber, y: number</span>) &#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在严格模式下函数可选参数会有一个undefined的类型，所以可选参数也可传undefined</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">add</span>(<span class="params">x: number, y: number | <span class="literal">undefined</span></span>) &#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>函数参数默认值</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">add</span>(<span class="params">x: number = <span class="number">0</span>, y: number = <span class="number">0</span></span>) &#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>函数可选参数不允许同时声明可选参数和默认值，否则会编译报错</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 对象数组参数类型</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">f0</span>(<span class="params">[x, y]: [number, number]</span>) &#123;&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">f1</span>(<span class="params">&#123;x, y&#125;: &#123;x: number; y: number&#125;</span>) &#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>类型别名与接口</strong></p>
+<ul>
+<li>类型别名能够表示非对象类型，而接口则只能表示对象类型</li>
+<li>接口可以继承其他的接口、类等对象类型，而类型别名则不支持继承</li>
+<li>接口名总是会显示在编译器的诊断信息和代码编辑器的智能提示中，而类型别名的名字只在特定情况才会显示出来</li>
+<li>接口具有声明合并的行为，而类型别名则不会进行声明合并</li>
+</ul>
+<p><strong>类</strong></p>
+<p>类的定义有两种方式</p>
+<ul>
+<li>类声明</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">ClassName</span> &#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>类表达式</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title class_">Name</span> = <span class="keyword">class</span> <span class="title class_">ClassName</span> &#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>类声明不会被提升，因此必须先声明后使用。</p>
+<p>如果一个类属性定义了get和set方法，那么get方法的返回值类型必须与set方法的参数类型一致，否则将产生错误。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">C</span> &#123;</span><br><span class="line">    <span class="comment">// 正确</span></span><br><span class="line">    private <span class="attr">_foo</span>: number = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">get</span> <span class="title function_">foo</span>(): number &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">_foo</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">set</span> <span class="title function_">foo</span>(<span class="params">value: number</span>) &#123;&#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 错误</span></span><br><span class="line">    private <span class="attr">_bar</span>: string = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">    <span class="keyword">get</span> <span class="title function_">bar</span>() &#123;</span><br><span class="line">        retunr <span class="variable language_">this</span>.<span class="property">_bar</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">set</span> <span class="title function_">bar</span>(<span class="params">value: number</span>) &#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果一个类属性同时定义了get方法和set方法，那么get方法和set方法必须具有相同的可访问性。例如不允许将get方法定义为公有的，而将set方法定义为私有的。</p>
+<p><strong>抽象类</strong></p>
+<p>抽象类与具体类的一个重要的区别是，抽象类不能被实例化。也就是说不能使用new运算符来创建一个抽象类的实例。抽象类的作用是作为基类，派生类可以继承抽象类。</p>
+<p><strong>泛型</strong></p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 泛型默认参数</span></span><br><span class="line">&lt;T = boolean&gt;</span><br><span class="line">&lt;T, U = T&gt;</span><br></pre></td></tr></table></figure>
+
+<p>泛型约束可以相互引用作为约束，但是不能直接或间接引用自身作为约束，否则将产生循环引用的编译错误</p>
+<p><strong>交叉类型</strong></p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">type T = A &amp; B <span class="comment">// 表示 T 既有 A 类型 又有 B 类型</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>内置工具</strong></p>
+<ol>
+<li><p>Partial<T></p>
+<p>该工具类型能够构造一个新类型，并将实际类型参数T中的所有属性变为可选属性。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">interface A &#123;</span><br><span class="line">	<span class="attr">x</span>: number;</span><br><span class="line">	<span class="attr">y</span>: number;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">type T = <span class="title class_">Partial</span>&lt;A&gt;; <span class="comment">// &#123; X?: number; y?: number &#125;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="attr">a</span>: T = &#123; <span class="attr">x</span>: <span class="number">0</span>, <span class="attr">y</span>: <span class="number">0</span> &#125;</span><br><span class="line"><span class="keyword">const</span> <span class="attr">b</span>: T = &#123; <span class="attr">x</span>: <span class="number">0</span> &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Required<T></p>
+<p>该工具类型能够构造一个新类型，并将实际类型参数T中的所有属性变为必选属性。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">interface A &#123;</span><br><span class="line">	x?: number;</span><br><span class="line">	<span class="attr">y</span>: number;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">type <span class="variable constant_">T0</span> = <span class="title class_">Required</span>&lt;A&gt; <span class="comment">// &#123; x: number, y: number &#125;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Readonly<T></p>
+<p>该工具能够构造一个新的类型，并将实际类型参数T中的所有属性变为只读属性。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">interfa A &#123;</span><br><span class="line">	<span class="attr">x</span>: number;</span><br><span class="line">	<span class="attr">y</span>: number;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">type T = <span class="title class_">Readonly</span>&lt;A&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Record&lt;K, T&gt;</p>
+<p>该工具类型能够使用给定的对象属性名类型和对象属性类型创建一个新的对象类型。”Record&lt;K, T&gt;”工具类型中的类型参数 K 提供了对象属性联合类型，类型参数 T 提供了对象属性的类型。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 因为类型参数 K 是用作对象属性名类型的，所以实际类型参数 K 必须能够赋值给 &quot;string|number|symbol&quot;</span></span><br><span class="line">type K = <span class="string">&#x27;x&#x27;</span> | <span class="string">&#x27;Y&#x27;</span></span><br><span class="line">type T = number</span><br><span class="line">type R = <span class="title class_">Record</span>&lt;K, T&gt; <span class="comment">// &#123; x: number, y: number &#125;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="attr">a</span>: R = &#123; <span class="attr">x</span>: <span class="number">0</span>, <span class="attr">y</span>: <span class="number">0</span> &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Pick<T></p>
+<p>该工具类型能够从已有对象类型中选取给定的属性及其类型，然后构建出一个新的对象类型。”Pick&lt;T, K&gt;” 工具类型中的类型参数 T 表示源对象类型，类型参数 K 提供了待选取的属性名类型，它必须为对象类型 T 中存在的属性。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">interface &#123;</span><br><span class="line">	<span class="attr">x</span>: number;</span><br><span class="line">	<span class="attr">y</span>: number;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">type <span class="variable constant_">T0</span> = <span class="title class_">Pick</span>&lt;A, <span class="string">&#x27;x&#x27;</span>&gt;</span><br><span class="line">type <span class="variable constant_">T1</span> = <span class="title class_">Pick</span>&lt;A, <span class="string">&#x27;y&#x27;</span>&gt;</span><br><span class="line">type <span class="variable constant_">T2</span> = <span class="title class_">Pick</span>&lt;A, <span class="string">&#x27;x&#x27;</span> | <span class="string">&#x27;y&#x27;</span>&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Omit&lt;T, K&gt;</p>
+<p>“Omit&lt;T, K&gt;”工具类型与 “Pick&lt;T, K&gt;” 工具类型是互补的，它能够从已有对象类型中剔除给定的属性，然后构建出一个新的对象类型。”Omit&lt;T,  K&gt;” 工具类型中的类型参数 T 表示源对象类型，类型参数 K 提供了待剔除的属性名类型，但它可以为对象类型 T中不存在的属性。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">interface A &#123;</span><br><span class="line">	<span class="attr">x</span>: number;</span><br><span class="line">	<span class="attr">y</span>: number;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">type <span class="variable constant_">T0</span> = <span class="title class_">Omit</span>&lt;A, <span class="string">&#x27;x&#x27;</span>&gt;</span><br><span class="line">type <span class="variable constant_">T1</span> = <span class="title class_">Omit</span>&lt;A, <span class="string">&#x27;y&#x27;</span>&gt;</span><br><span class="line">type <span class="variable constant_">T2</span> = <span class="title class_">Omit</span>&lt;A, <span class="string">&#x27;x&#x27;</span> | <span class="string">&#x27;y&#x27;</span>&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Exclude&lt;T, U&gt;</p>
+<p>该工具类型能够从类型 T 中剔除所有可以赋值给类型 U 的类型</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">type <span class="variable constant_">T0</span> = <span class="title class_">Exclude</span>&lt;<span class="string">&#x27;a&#x27;</span> | <span class="string">&#x27;b&#x27;</span> | <span class="string">&#x27;c&#x27;</span>, <span class="string">&#x27;a&#x27;</span>&gt;; <span class="comment">// &#x27;b&#x27; | &#x27;c&#x27;</span></span><br><span class="line">type <span class="variable constant_">T1</span> = <span class="title class_">Exclude</span>&lt;<span class="string">&#x27;a&#x27;</span> | <span class="string">&#x27;b&#x27;</span> | <span class="string">&#x27;c&#x27;</span>, <span class="string">&#x27;a&#x27;</span> | <span class="string">&#x27;b&#x27;</span>&gt;; <span class="comment">// &#x27;c&#x27;</span></span><br><span class="line">type <span class="variable constant_">T2</span> = <span class="title class_">Exclude</span>&lt;string | (<span class="function">() =&gt;</span> <span class="keyword">void</span>), <span class="title class_">Function</span>&gt;; <span class="comment">// string</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Extract&lt;T, U&gt;</p>
+<p>“Extract&lt;T, U&gt;” 工具类型与 Exclude&lt;T, U&gt; 工具类型是互补的，它能够从类型 T 中获取所有可以赋值给类型 U 的类型。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">type <span class="variable constant_">T0</span> = <span class="title class_">Extract</span>&lt;<span class="string">&#x27;a&#x27;</span> | <span class="string">&#x27;b&#x27;</span> | <span class="string">&#x27;c&#x27;</span>, <span class="string">&#x27;a&#x27;</span> | <span class="string">&#x27;f&#x27;</span>&gt;; <span class="comment">// &#x27;a&#x27;</span></span><br><span class="line">type <span class="variable constant_">T1</span> = <span class="title class_">Extract</span>&lt;string | (<span class="function">() =&gt;</span> <span class="keyword">void</span>), <span class="title class_">Fuction</span>&gt;; <span class="comment">// () =&gt; void</span></span><br><span class="line">type <span class="variable constant_">T2</span> = <span class="title class_">Extract</span>&lt;string | number, boolean&gt;; <span class="comment">// never</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>NonNullable<T></p>
+<p>该工具类型能够从类型 T 中剔除 null 类型和 undefined 类型并构造一个新类型，也就是获取类型 T 中的非空类型。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">type <span class="variable constant_">T0</span> = <span class="title class_">NonNullable</span>&lt;string | number | <span class="literal">undefined</span>&gt;; <span class="comment">// string | number</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>ReturnType</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">type T0 = ReturnType&lt;() =&gt; string&gt;; // string</span><br><span class="line">type T4 = ReturnType&lt;&lt;T extends U, U extends number[]&gt; () =&gt; T&gt; // number[]</span><br><span class="line"></span><br><span class="line">type T6 = ReturnType&lt;boolean&gt;; // 编译错误</span><br><span class="line">type T7 = ReturnType&lt;Function&gt;; // 编译错误</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p><strong>断言函数</strong></p>
+<p>断言表示一种判定，如果对断言求值的结果为false，则意味着程序出错</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 断言函数有以下两种形式</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">assert</span>(<span class="params">x: unknown</span>): asserts x is T &#123;&#125;</span><br><span class="line"><span class="comment">// 或</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">assert</span>(<span class="params">x: unknown</span>): asserts x &#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上述两种写法中， “asserts x is T” 和 “asserts x” 表示判定，它只能作为函数的返回值类型。asserts 和 is 是关键字；x 必须为函数列表中的一个形式参数名；T 表示任意的类型； “is T” 部分是可选的。若一个函数带有 asserts 类型判定，那么该函数就是一个断言函数。</p>
+<p>表示如果参数不是 Boolean 类型，那么函数将抛出异常</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">assertsIsBoolean</span>(<span class="params">x: unknown</span>): asserts x is boolean &#123;</span><br><span class="line">	<span class="keyword">if</span> (<span class="keyword">typeof</span> x !== <span class="string">&#x27;boolean&#x27;</span>) &#123;</span><br><span class="line">		<span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">TypeError</span>(<span class="string">&#x27;error&#x27;</span>)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>表示参数不是真值则抛出异常</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">function assertTruthy(x: unknown) &#123;</span><br><span class="line">	if (!x) &#123;</span><br><span class="line">		throw new TypeError(&#x27;error&#x27;)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>命名空间 namespace</strong></p>
+<p>不同文件的同命名空间最终会被合并</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">namespace <span class="title class_">Utils</span> &#123;</span><br><span class="line">    <span class="keyword">function</span> <span class="title function_">isString</span>(<span class="params">value: any</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">typeof</span> value === <span class="string">&#x27;string&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 转换成js</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> <span class="title class_">Utils</span>;</span><br><span class="line">(<span class="keyword">function</span> (<span class="params">Utils</span>) &#123;</span><br><span class="line">    <span class="keyword">function</span> <span class="title function_">isString</span>(<span class="params">value</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">typeof</span> value === <span class="string">&#x27;string&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)(<span class="title class_">Utils</span> || (<span class="title class_">Utils</span> = &#123;&#125;));</span><br><span class="line"></span><br><span class="line"><span class="comment">// 在外部使用命名空间的方法</span></span><br><span class="line">namespace <span class="title class_">Utils</span> &#123;</span><br><span class="line">    <span class="keyword">export</span> <span class="keyword">function</span> <span class="title function_">isString</span>(<span class="params">value: any</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">typeof</span> value === <span class="string">&#x27;string&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title class_">Utils</span>.<span class="title function_">isString</span>(<span class="string">&#x27;yes&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p><strong>别名导入</strong></p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">namespace <span class="title class_">Utils</span> &#123;</span><br><span class="line">	exprot <span class="keyword">function</span> <span class="title function_">isString</span>(<span class="params">value: any</span>) &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">typeof</span> value === <span class="string">&#x27;string&#x27;</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">namespace <span class="title class_">App</span> &#123;</span><br><span class="line">	<span class="keyword">import</span> isString = <span class="title class_">Utils</span>.<span class="property">isString</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>保证两个文件的加载顺序</strong></p>
+<p>通过”tsconfig.json”配置文件能够定义文件间的加载顺序。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	<span class="string">&quot;compilerOptions&quot;</span>: &#123;</span><br><span class="line">		...,</span><br><span class="line">		<span class="string">&quot;outFile&quot;</span>: <span class="string">&quot;main.js&quot;</span>, <span class="comment">// 指定输出文件名</span></span><br><span class="line">	&#125;,</span><br><span class="line">	<span class="string">&quot;files&quot;</span>: [<span class="string">&quot;a.ts&quot;</span>, <span class="string">&quot;b.ts&quot;</span>], <span class="comment">// 定义加载顺序</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+]]></content>
+      <tags>
+        <tag>typescript</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hello World</title>
+    <url>/2022/10/13/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+]]></content>
+  </entry>
+</search>
