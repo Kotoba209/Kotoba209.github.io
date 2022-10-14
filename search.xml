@@ -17,9 +17,9 @@
 <p>any 类型的变量可以接受为任何类型的值，也可以把该变量赋值给任何类型的变量</p>
 <p>unknown：</p>
 <p>unknown类型仅能够赋值给any类型和unknown类型，在程序中使用unknown类型时，必须将其细化为某种具体类型，否则会产生错误</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">\\ 错误示例</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">f1</span>(<span class="params">message: unknown</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> message.<span class="property">length</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 错误示例</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">f1</span>(<span class="params">message: unknown</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> message.<span class="property">length</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">\\ 正确示例</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">f2</span>(<span class="params">message: unknown</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> message === <span class="string">&#x27;string&#x27;</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> message.<span class="property">length</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 正确示例</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">f2</span>(<span class="params">message: unknown</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> message === <span class="string">&#x27;string&#x27;</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> message.<span class="property">length</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p><strong>尾端类型</strong></p>
 <p>never:</p>
@@ -165,8 +165,11 @@
 
 
 ]]></content>
+      <categories>
+        <category>Typescript</category>
+      </categories>
       <tags>
-        <tag>typescript</tag>
+        <tag>Typescript</tag>
       </tags>
   </entry>
   <entry>
