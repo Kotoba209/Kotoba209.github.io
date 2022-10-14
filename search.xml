@@ -1,19 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Hello World</title>
+    <url>/2022/10/13/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+]]></content>
+  </entry>
+  <entry>
     <title>TypeScript笔记</title>
     <url>/2022/10/13/TypeScript%E7%AC%94%E8%AE%B0/</url>
-    <content><![CDATA[<p><strong>单元类型</strong></p>
-<ul>
+    <content><![CDATA[<h3 id="单元类型"><a href="#单元类型" class="headerlink" title="单元类型"></a>单元类型</h3><ul>
 <li>undefined</li>
 <li>null</li>
 <li>unique symbol</li>
 <li>void</li>
 <li>字面量</li>
-<li>联合枚举成员类型</li>
+<li>联合枚举成员类型<span id="more"></span></li>
 </ul>
-<p><strong>顶端类型</strong></p>
-<p>any:</p>
+<h3 id="顶端类型"><a href="#顶端类型" class="headerlink" title="顶端类型"></a>顶端类型</h3><p>any:</p>
 <p>any 类型的变量可以接受为任何类型的值，也可以把该变量赋值给任何类型的变量</p>
 <p>unknown：</p>
 <p>unknown类型仅能够赋值给any类型和unknown类型，在程序中使用unknown类型时，必须将其细化为某种具体类型，否则会产生错误</p>
@@ -21,19 +37,15 @@
 
 <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 正确示例</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">f2</span>(<span class="params">message: unknown</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> message === <span class="string">&#x27;string&#x27;</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> message.<span class="property">length</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p><strong>尾端类型</strong></p>
-<p>never:</p>
+<h3 id="尾端类型"><a href="#尾端类型" class="headerlink" title="尾端类型"></a>尾端类型</h3><p>never:</p>
 <p>不包含任何可能指，never类型是所以类型的子类型，它允许赋值给任何类型。never只能接受自身类型的赋值，any类型也不能赋值给它。</p>
 <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">f</span>(<span class="params"></span>): never &#123;</span><br><span class="line">   <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">Error</span>()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p><strong>数组</strong></p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 常规写法</span></span><br><span class="line"><span class="keyword">const</span> <span class="attr">ary</span>: number[] = [<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>]</span><br><span class="line"><span class="comment">// 多类型子元素写法</span></span><br><span class="line"><span class="keyword">const</span> <span class="attr">ary</span>: (string|number)[] = [<span class="string">&#x27;f&#x27;</span>, <span class="number">1</span>, <span class="number">2</span>]</span><br><span class="line"><span class="comment">// 泛型数组写法</span></span><br><span class="line"><span class="keyword">const</span> <span class="attr">ary</span>: <span class="title class_">Array</span>&lt;number&gt; = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line"><span class="keyword">const</span> <span class="attr">ary</span>: <span class="title class_">Array</span>&lt;string|number&gt; = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line"><span class="comment">// 对象数组写法</span></span><br><span class="line"><span class="keyword">const</span> <span class="attr">ary</span>: <span class="title class_">Array</span>&lt;&#123;<span class="attr">x</span>: number; <span class="attr">y</span>: number&#125;&gt;</span><br><span class="line"><span class="comment">// 只读数组</span></span><br><span class="line"><span class="keyword">const</span> <span class="attr">ary</span>: <span class="title class_">ReadonlyArray</span>&lt;number&gt; = [<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>]</span><br><span class="line"><span class="keyword">const</span> <span class="attr">ary</span>: readonly number[] = [<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>]</span><br></pre></td></tr></table></figure>
+<h3 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 常规写法</span></span><br><span class="line"><span class="keyword">const</span> <span class="attr">ary</span>: number[] = [<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>]</span><br><span class="line"><span class="comment">// 多类型子元素写法</span></span><br><span class="line"><span class="keyword">const</span> <span class="attr">ary</span>: (string|number)[] = [<span class="string">&#x27;f&#x27;</span>, <span class="number">1</span>, <span class="number">2</span>]</span><br><span class="line"><span class="comment">// 泛型数组写法</span></span><br><span class="line"><span class="keyword">const</span> <span class="attr">ary</span>: <span class="title class_">Array</span>&lt;number&gt; = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line"><span class="keyword">const</span> <span class="attr">ary</span>: <span class="title class_">Array</span>&lt;string|number&gt; = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line"><span class="comment">// 对象数组写法</span></span><br><span class="line"><span class="keyword">const</span> <span class="attr">ary</span>: <span class="title class_">Array</span>&lt;&#123;<span class="attr">x</span>: number; <span class="attr">y</span>: number&#125;&gt;</span><br><span class="line"><span class="comment">// 只读数组</span></span><br><span class="line"><span class="keyword">const</span> <span class="attr">ary</span>: <span class="title class_">ReadonlyArray</span>&lt;number&gt; = [<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>]</span><br><span class="line"><span class="keyword">const</span> <span class="attr">ary</span>: readonly number[] = [<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>]</span><br></pre></td></tr></table></figure>
 
-<p><strong>元组</strong></p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 不确定数量元组</span></span><br><span class="line"><span class="keyword">const</span> <span class="attr">tuple</span>: [number, ...string[]] = [<span class="number">1</span>, <span class="string">&#x27;2&#x27;</span>, <span class="string">&#x27;3&#x27;</span>]</span><br></pre></td></tr></table></figure>
+<h3 id="元组"><a href="#元组" class="headerlink" title="元组"></a>元组</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 不确定数量元组</span></span><br><span class="line"><span class="keyword">const</span> <span class="attr">tuple</span>: [number, ...string[]] = [<span class="number">1</span>, <span class="string">&#x27;2&#x27;</span>, <span class="string">&#x27;3&#x27;</span>]</span><br></pre></td></tr></table></figure>
 
-<p><strong>对象</strong></p>
-<p>object类型的变量除了undefined和null值外，其他任何值都可以赋值给该类型变量（当在原始值上调用某个方法时，JavaScript会对原始值执行封箱操作，将其转换为对象类型，然后再调用相应方法）</p>
+<h3 id="对象"><a href="#对象" class="headerlink" title="对象"></a>对象</h3><p>object类型的变量除了undefined和null值外，其他任何值都可以赋值给该类型变量（当在原始值上调用某个方法时，JavaScript会对原始值执行封箱操作，将其转换为对象类型，然后再调用相应方法）</p>
 <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="attr">obj</span>: object = &#123; <span class="attr">name</span>: <span class="string">&#x27;张三&#x27;</span>, <span class="attr">age</span>: <span class="number">24</span>, <span class="attr">foo</span>: <span class="string">&#x27;测试&#x27;</span> &#125;</span><br></pre></td></tr></table></figure>
 
 <p>object类型不允许读取和修改object类型上的自定义属性</p>
@@ -54,8 +66,7 @@
 <p>字面量定义对象类型</p>
 <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="attr">obj</span>: &#123;&#125; = &#123;<span class="attr">foo</span>: <span class="string">&#x27;测试&#x27;</span>&#125;</span><br></pre></td></tr></table></figure>
 
-<p><strong>函数</strong></p>
-<p>函数的可选参数必须位于函数参数列表的尾部，可选参数之后不允许再出现必选参数，否则将产生编译错误</p>
+<h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><p>函数的可选参数必须位于函数参数列表的尾部，可选参数之后不允许再出现必选参数，否则将产生编译错误</p>
 <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">add</span>(<span class="params">x: number, y: number</span>) &#123;&#125;</span><br><span class="line"><span class="comment">// 错误示例</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">add</span>(<span class="params">x?: unmber, y: number</span>) &#123;&#125;</span><br></pre></td></tr></table></figure>
 
 <p>在严格模式下函数可选参数会有一个undefined的类型，所以可选参数也可传undefined</p>
@@ -67,15 +78,13 @@
 <p>函数可选参数不允许同时声明可选参数和默认值，否则会编译报错</p>
 <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 对象数组参数类型</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">f0</span>(<span class="params">[x, y]: [number, number]</span>) &#123;&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">f1</span>(<span class="params">&#123;x, y&#125;: &#123;x: number; y: number&#125;</span>) &#123;&#125;</span><br></pre></td></tr></table></figure>
 
-<p><strong>类型别名与接口</strong></p>
-<ul>
+<h3 id="类型别名与接口"><a href="#类型别名与接口" class="headerlink" title="类型别名与接口"></a>类型别名与接口</h3><ul>
 <li>类型别名能够表示非对象类型，而接口则只能表示对象类型</li>
 <li>接口可以继承其他的接口、类等对象类型，而类型别名则不支持继承</li>
 <li>接口名总是会显示在编译器的诊断信息和代码编辑器的智能提示中，而类型别名的名字只在特定情况才会显示出来</li>
 <li>接口具有声明合并的行为，而类型别名则不会进行声明合并</li>
 </ul>
-<p><strong>类</strong></p>
-<p>类的定义有两种方式</p>
+<h3 id="类"><a href="#类" class="headerlink" title="类"></a>类</h3><p>类的定义有两种方式</p>
 <ul>
 <li>类声明</li>
 </ul>
@@ -91,17 +100,13 @@
 <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">C</span> &#123;</span><br><span class="line">    <span class="comment">// 正确</span></span><br><span class="line">    private <span class="attr">_foo</span>: number = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">get</span> <span class="title function_">foo</span>(): number &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">_foo</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">set</span> <span class="title function_">foo</span>(<span class="params">value: number</span>) &#123;&#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 错误</span></span><br><span class="line">    private <span class="attr">_bar</span>: string = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">    <span class="keyword">get</span> <span class="title function_">bar</span>() &#123;</span><br><span class="line">        retunr <span class="variable language_">this</span>.<span class="property">_bar</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">set</span> <span class="title function_">bar</span>(<span class="params">value: number</span>) &#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>如果一个类属性同时定义了get方法和set方法，那么get方法和set方法必须具有相同的可访问性。例如不允许将get方法定义为公有的，而将set方法定义为私有的。</p>
-<p><strong>抽象类</strong></p>
-<p>抽象类与具体类的一个重要的区别是，抽象类不能被实例化。也就是说不能使用new运算符来创建一个抽象类的实例。抽象类的作用是作为基类，派生类可以继承抽象类。</p>
-<p><strong>泛型</strong></p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 泛型默认参数</span></span><br><span class="line">&lt;T = boolean&gt;</span><br><span class="line">&lt;T, U = T&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="抽象类"><a href="#抽象类" class="headerlink" title="抽象类"></a>抽象类</h3><p>抽象类与具体类的一个重要的区别是，抽象类不能被实例化。也就是说不能使用new运算符来创建一个抽象类的实例。抽象类的作用是作为基类，派生类可以继承抽象类。</p>
+<h3 id="泛型"><a href="#泛型" class="headerlink" title="泛型"></a>泛型</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 泛型默认参数</span></span><br><span class="line">&lt;T = boolean&gt;</span><br><span class="line">&lt;T, U = T&gt;</span><br></pre></td></tr></table></figure>
 
 <p>泛型约束可以相互引用作为约束，但是不能直接或间接引用自身作为约束，否则将产生循环引用的编译错误</p>
-<p><strong>交叉类型</strong></p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">type T = A &amp; B <span class="comment">// 表示 T 既有 A 类型 又有 B 类型</span></span><br></pre></td></tr></table></figure>
+<h3 id="交叉类型"><a href="#交叉类型" class="headerlink" title="交叉类型"></a>交叉类型</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">type T = A &amp; B <span class="comment">// 表示 T 既有 A 类型 又有 B 类型</span></span><br></pre></td></tr></table></figure>
 
-<p><strong>内置工具</strong></p>
-<ol>
+<h3 id="内置工具"><a href="#内置工具" class="headerlink" title="内置工具"></a>内置工具</h3><ol>
 <li><p>Partial<T></p>
 <p>该工具类型能够构造一个新类型，并将实际类型参数T中的所有属性变为可选属性。</p>
 <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">interface A &#123;</span><br><span class="line">	<span class="attr">x</span>: number;</span><br><span class="line">	<span class="attr">y</span>: number;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">type T = <span class="title class_">Partial</span>&lt;A&gt;; <span class="comment">// &#123; X?: number; y?: number &#125;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="attr">a</span>: T = &#123; <span class="attr">x</span>: <span class="number">0</span>, <span class="attr">y</span>: <span class="number">0</span> &#125;</span><br><span class="line"><span class="keyword">const</span> <span class="attr">b</span>: T = &#123; <span class="attr">x</span>: <span class="number">0</span> &#125;</span><br></pre></td></tr></table></figure>
@@ -141,8 +146,7 @@
 <li><p>ReturnType</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">type T0 = ReturnType&lt;() =&gt; string&gt;; // string</span><br><span class="line">type T4 = ReturnType&lt;&lt;T extends U, U extends number[]&gt; () =&gt; T&gt; // number[]</span><br><span class="line"></span><br><span class="line">type T6 = ReturnType&lt;boolean&gt;; // 编译错误</span><br><span class="line">type T7 = ReturnType&lt;Function&gt;; // 编译错误</span><br></pre></td></tr></table></figure></li>
 </ol>
-<p><strong>断言函数</strong></p>
-<p>断言表示一种判定，如果对断言求值的结果为false，则意味着程序出错</p>
+<h3 id="断言函数"><a href="#断言函数" class="headerlink" title="断言函数"></a>断言函数</h3><p>断言表示一种判定，如果对断言求值的结果为false，则意味着程序出错</p>
 <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 断言函数有以下两种形式</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">assert</span>(<span class="params">x: unknown</span>): asserts x is T &#123;&#125;</span><br><span class="line"><span class="comment">// 或</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">assert</span>(<span class="params">x: unknown</span>): asserts x &#123;&#125;</span><br></pre></td></tr></table></figure>
 
 <p>上述两种写法中， “asserts x is T” 和 “asserts x” 表示判定，它只能作为函数的返回值类型。asserts 和 is 是关键字；x 必须为函数列表中的一个形式参数名；T 表示任意的类型； “is T” 部分是可选的。若一个函数带有 asserts 类型判定，那么该函数就是一个断言函数。</p>
@@ -152,15 +156,12 @@
 <p>表示参数不是真值则抛出异常</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">function assertTruthy(x: unknown) &#123;</span><br><span class="line">	if (!x) &#123;</span><br><span class="line">		throw new TypeError(&#x27;error&#x27;)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p><strong>命名空间 namespace</strong></p>
-<p>不同文件的同命名空间最终会被合并</p>
+<h3 id="命名空间-namespace"><a href="#命名空间-namespace" class="headerlink" title="命名空间 namespace"></a>命名空间 namespace</h3><p>不同文件的同命名空间最终会被合并</p>
 <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">namespace <span class="title class_">Utils</span> &#123;</span><br><span class="line">    <span class="keyword">function</span> <span class="title function_">isString</span>(<span class="params">value: any</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">typeof</span> value === <span class="string">&#x27;string&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 转换成js</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> <span class="title class_">Utils</span>;</span><br><span class="line">(<span class="keyword">function</span> (<span class="params">Utils</span>) &#123;</span><br><span class="line">    <span class="keyword">function</span> <span class="title function_">isString</span>(<span class="params">value</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">typeof</span> value === <span class="string">&#x27;string&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)(<span class="title class_">Utils</span> || (<span class="title class_">Utils</span> = &#123;&#125;));</span><br><span class="line"></span><br><span class="line"><span class="comment">// 在外部使用命名空间的方法</span></span><br><span class="line">namespace <span class="title class_">Utils</span> &#123;</span><br><span class="line">    <span class="keyword">export</span> <span class="keyword">function</span> <span class="title function_">isString</span>(<span class="params">value: any</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">typeof</span> value === <span class="string">&#x27;string&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title class_">Utils</span>.<span class="title function_">isString</span>(<span class="string">&#x27;yes&#x27;</span>)</span><br></pre></td></tr></table></figure>
 
-<p><strong>别名导入</strong></p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">namespace <span class="title class_">Utils</span> &#123;</span><br><span class="line">	exprot <span class="keyword">function</span> <span class="title function_">isString</span>(<span class="params">value: any</span>) &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">typeof</span> value === <span class="string">&#x27;string&#x27;</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">namespace <span class="title class_">App</span> &#123;</span><br><span class="line">	<span class="keyword">import</span> isString = <span class="title class_">Utils</span>.<span class="property">isString</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="别名导入"><a href="#别名导入" class="headerlink" title="别名导入"></a>别名导入</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">namespace <span class="title class_">Utils</span> &#123;</span><br><span class="line">	exprot <span class="keyword">function</span> <span class="title function_">isString</span>(<span class="params">value: any</span>) &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">typeof</span> value === <span class="string">&#x27;string&#x27;</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">namespace <span class="title class_">App</span> &#123;</span><br><span class="line">	<span class="keyword">import</span> isString = <span class="title class_">Utils</span>.<span class="property">isString</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p><strong>保证两个文件的加载顺序</strong></p>
-<p>通过”tsconfig.json”配置文件能够定义文件间的加载顺序。</p>
+<h3 id="保证两个文件的加载顺序"><a href="#保证两个文件的加载顺序" class="headerlink" title="保证两个文件的加载顺序"></a>保证两个文件的加载顺序</h3><p>通过”tsconfig.json”配置文件能够定义文件间的加载顺序。</p>
 <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	<span class="string">&quot;compilerOptions&quot;</span>: &#123;</span><br><span class="line">		...,</span><br><span class="line">		<span class="string">&quot;outFile&quot;</span>: <span class="string">&quot;main.js&quot;</span>, <span class="comment">// 指定输出文件名</span></span><br><span class="line">	&#125;,</span><br><span class="line">	<span class="string">&quot;files&quot;</span>: [<span class="string">&quot;a.ts&quot;</span>, <span class="string">&quot;b.ts&quot;</span>], <span class="comment">// 定义加载顺序</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
@@ -171,23 +172,5 @@
       <tags>
         <tag>Typescript</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>Hello World</title>
-    <url>/2022/10/13/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-]]></content>
   </entry>
 </search>
