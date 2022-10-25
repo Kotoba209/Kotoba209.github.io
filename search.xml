@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title></title>
+    <title>HEXO-Github-搭建个人博客</title>
     <url>/2022/10/17/HEXO-Github-%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</url>
     <content><![CDATA[<h4 id="HEXO搭建"><a href="#HEXO搭建" class="headerlink" title="HEXO搭建"></a>HEXO搭建</h4><p>在搭建 hexo 博客之前需要做一些准备工作，如需要安装 Node.js、Git及一个GitHub账号，继续全局安装 hexo-cli  <code>npm install hexo-cli -g</code>，之后在任意文件夹内执行下方命令搭建 hexo</p>
+<span id="more"></span>
+
 <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">hexo init hexo-blog <span class="comment">// 初始化hexo</span></span><br><span class="line">cd hexo-blog</span><br><span class="line">hexo clean <span class="comment">// 清除缓存</span></span><br><span class="line">hexo generate <span class="comment">// 生成静态文件</span></span><br><span class="line">hexo server <span class="comment">// 本地启动服务</span></span><br></pre></td></tr></table></figure>
 
 <h4 id="HEXO-命令"><a href="#HEXO-命令" class="headerlink" title="HEXO 命令"></a>HEXO 命令</h4><ul>
@@ -60,6 +62,12 @@
 <li><a href="https://www.techgrow.cn/posts/abf4aee1.html">Next 8.x 主题添加可切换的暗黑模式</a></li>
 </ul>
 ]]></content>
+      <categories>
+        <category>Utils</category>
+      </categories>
+      <tags>
+        <tag>Utils</tag>
+      </tags>
   </entry>
   <entry>
     <title>Hello World</title>
