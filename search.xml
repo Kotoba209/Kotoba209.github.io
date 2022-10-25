@@ -1,75 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>HEXO-Github-搭建个人博客</title>
-    <url>/2022/10/17/HEXO-Github-%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</url>
-    <content><![CDATA[<h4 id="HEXO搭建"><a href="#HEXO搭建" class="headerlink" title="HEXO搭建"></a>HEXO搭建</h4><p>在搭建 hexo 博客之前需要做一些准备工作，如需要安装 Node.js、Git及一个GitHub账号，继续全局安装 hexo-cli  <code>npm install hexo-cli -g</code>，之后在任意文件夹内执行下方命令搭建 hexo</p>
-<span id="more"></span>
-
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">hexo init hexo-blog <span class="comment">// 初始化hexo</span></span><br><span class="line">cd hexo-blog</span><br><span class="line">hexo clean <span class="comment">// 清除缓存</span></span><br><span class="line">hexo generate <span class="comment">// 生成静态文件</span></span><br><span class="line">hexo server <span class="comment">// 本地启动服务</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="HEXO-命令"><a href="#HEXO-命令" class="headerlink" title="HEXO 命令"></a>HEXO 命令</h4><ul>
-<li><code>hexo clean</code>：清除生成的静态文件和缓存</li>
-<li><code>hexo generate</code>：生成静态文件，可简写为 <code>hexo g</code></li>
-<li><code>hexo server</code>：启动本地服务，可简写为 <code>hexo s</code></li>
-<li><code>hexo deploy</code>：部署静态文件到远端服务器，可简写为 <code>hexo d</code></li>
-</ul>
-<p><strong>常用命令组合</strong></p>
-<ol>
-<li>预览 <code>hexo clean &amp;&amp; hexo generate &amp;&amp; hexo server --port 80 --open</code> 重新生成静态文件后在80端口启动预览博客</li>
-<li>部署 <code>hexo clean &amp;&amp; hexo generate &amp;&amp; hexo deploy</code> 重新生成静态文件后部署到远端服务器</li>
-</ol>
-<h4 id="站点配置文件"><a href="#站点配置文件" class="headerlink" title="站点配置文件"></a>站点配置文件</h4><p>配置文件为根目录的 _config.yml 文件，可以配置博客标题、语言、主题、GitHub 信息等</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="attr">title</span>: <span class="title class_">Kotoba</span></span><br><span class="line"><span class="attr">subtitle</span>: <span class="string">&#x27;技术博客&#x27;</span></span><br><span class="line"><span class="attr">description</span>: <span class="string">&#x27;技术博客网站&#x27;</span></span><br><span class="line"><span class="attr">keywords</span>: <span class="literal">null</span></span><br><span class="line"><span class="attr">author</span>: kotoba</span><br><span class="line"><span class="attr">language</span>: zh-<span class="variable constant_">CN</span></span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-
-<h4 id="主题配置"><a href="#主题配置" class="headerlink" title="主题配置"></a>主题配置</h4><p>安装 Next 主题</p>
-<ul>
-<li><p>npm</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">$ npm install hexo-theme-next@latest</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>git</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">$ git clone <span class="attr">https</span>:<span class="comment">//github.com/next-theme/hexo-theme-next themes/next</span></span><br><span class="line"><span class="comment">// 通过 git 安装要注意看是否为最新版本，建议更新到最新版，git 仓库：https://github.com/next-theme/hexo-theme-next</span></span><br></pre></td></tr></table></figure></li>
-</ul>
-<p>安装完成之后在站点配置文件 _config.yml 应用起来</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="attr">theme</span>: next</span><br></pre></td></tr></table></figure>
-
-<p>主题也有自己的配置文件，比如配置 博客布局、菜单、标签图标等，通过 npm 安装的需要在依赖node_modules里面找到 hexo-theme-next 底下的 _config.yml  配置文件，通过 git 安装的在 themes 文件夹里面找到对应的配置文件</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 布局配置，找到文件里的对应位置，通过配置其他选项来修改博客布局</span></span><br><span class="line"><span class="attr">scheme</span>: <span class="title class_">Gemini</span></span><br><span class="line"><span class="comment">// 配置菜单</span></span><br><span class="line"><span class="attr">menu</span>:</span><br><span class="line"><span class="comment">// 配置头像</span></span><br><span class="line"><span class="attr">avatar</span>:</span><br><span class="line"><span class="comment">// 配置图标链接</span></span><br><span class="line"><span class="attr">social</span>:</span><br><span class="line"><span class="comment">// 配置右上角 GitHub 图标链接</span></span><br><span class="line"><span class="attr">github_banner</span>:</span><br><span class="line"></span><br><span class="line"><span class="comment">// next 主题颜色切换 （增加暗黑主题） https://www.techgrow.cn/posts/abf4aee1.html</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="部署到-GitHub"><a href="#部署到-GitHub" class="headerlink" title="部署到 GitHub"></a>部署到 GitHub</h4><p>新建仓库并把仓库名定义为 xx.github.io（xx为你的GitHub用户名，比如我的 &#x2F;Kotoba209.github.io.git），之后在站点配置文件里面加入 GitHub 信息</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="attr">deploy</span>:</span><br><span class="line">  <span class="attr">type</span>: git</span><br><span class="line">  <span class="attr">repo</span>: git@github.<span class="property">com</span>:<span class="title class_">Kotoba209</span>/<span class="title class_">Kotoba209</span>.<span class="property">github</span>.<span class="property">io</span>.<span class="property">git</span></span><br><span class="line">  <span class="attr">branch</span>: master</span><br></pre></td></tr></table></figure>
-
-<p>执行hexo命令</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo g</span><br><span class="line">hexo s</span><br></pre></td></tr></table></figure>
-
-<p>浏览博客网页 <a href="https://xxx.github.io/">https://xxx.github.io</a> （执行完命令之后，可以到仓库-Settings-Pages 关联到master分支 之后可以在这里看是否更新完成）</p>
-<h4 id="配置插件"><a href="#配置插件" class="headerlink" title="配置插件"></a>配置插件</h4><ul>
-<li><p>字数统计</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">npm install hexo-word-counter</span><br><span class="line"><span class="comment">// 安装之后需要在 next 的主题配置文件配置</span></span><br><span class="line"><span class="attr">symbols_count_time</span>:</span><br><span class="line">  <span class="attr">separated_meta</span>: <span class="literal">true</span></span><br><span class="line">  <span class="attr">item_text_total</span>: <span class="literal">true</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>远端部署</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install hexo-deployer-git</span><br><span class="line">// 安装之后在站点配置文件</span><br><span class="line"># Deployment</span><br><span class="line">## Docs: https://hexo.io/docs/one-command-deployment</span><br><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repo: git@github.com:Kotoba209/Kotoba209.github.io.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h4 id="创建文章"><a href="#创建文章" class="headerlink" title="创建文章"></a>创建文章</h4><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 到本地仓库根目录下执行（blog文件夹）</span></span><br><span class="line">hexo <span class="keyword">new</span> <span class="string">&#x27;name(文章名)&#x27;</span></span><br><span class="line"><span class="comment">// 命令执行后在 blog 文件夹下面的 source - _posts里面看到新建的文件</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h4><ul>
-<li><a href="https://blog.csdn.net/weixin_48927364/article/details/123295436">创建关于、分类、标签等页面</a></li>
-<li><a href="https://blog.csdn.net/yueyue200830/article/details/104470646">博客首页只显示文章部分摘要</a></li>
-</ul>
-<h4 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h4><ul>
-<li><a href="https://blog.0xfaner.site/posts/hexo-next-config/">Hexo 静态博客框架 NexT 主题配置教程</a></li>
-<li><a href="https://theme-next.js.org/docs/getting-started/installation.html#Using-npm">Next安装文档</a></li>
-<li><a href="https://www.techgrow.cn/posts/abf4aee1.html">Next 8.x 主题添加可切换的暗黑模式</a></li>
-</ul>
-]]></content>
-      <categories>
-        <category>Utils</category>
-      </categories>
-      <tags>
-        <tag>Utils</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Hello World</title>
     <url>/2022/10/13/hello-world/</url>
     <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
@@ -240,6 +171,75 @@
       </categories>
       <tags>
         <tag>Typescript</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>HEXO-Github-搭建个人博客</title>
+    <url>/2022/10/17/HEXO-Github-%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</url>
+    <content><![CDATA[<h4 id="HEXO搭建"><a href="#HEXO搭建" class="headerlink" title="HEXO搭建"></a>HEXO搭建</h4><p>在搭建 hexo 博客之前需要做一些准备工作，如需要安装 Node.js、Git及一个GitHub账号，继续全局安装 hexo-cli  <code>npm install hexo-cli -g</code>，之后在任意文件夹内执行下方命令搭建 hexo</p>
+<span id="more"></span>
+
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">hexo init hexo-blog <span class="comment">// 初始化hexo</span></span><br><span class="line">cd hexo-blog</span><br><span class="line">hexo clean <span class="comment">// 清除缓存</span></span><br><span class="line">hexo generate <span class="comment">// 生成静态文件</span></span><br><span class="line">hexo server <span class="comment">// 本地启动服务</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="HEXO-命令"><a href="#HEXO-命令" class="headerlink" title="HEXO 命令"></a>HEXO 命令</h4><ul>
+<li><code>hexo clean</code>：清除生成的静态文件和缓存</li>
+<li><code>hexo generate</code>：生成静态文件，可简写为 <code>hexo g</code></li>
+<li><code>hexo server</code>：启动本地服务，可简写为 <code>hexo s</code></li>
+<li><code>hexo deploy</code>：部署静态文件到远端服务器，可简写为 <code>hexo d</code></li>
+</ul>
+<p><strong>常用命令组合</strong></p>
+<ol>
+<li>预览 <code>hexo clean &amp;&amp; hexo generate &amp;&amp; hexo server --port 80 --open</code> 重新生成静态文件后在80端口启动预览博客</li>
+<li>部署 <code>hexo clean &amp;&amp; hexo generate &amp;&amp; hexo deploy</code> 重新生成静态文件后部署到远端服务器</li>
+</ol>
+<h4 id="站点配置文件"><a href="#站点配置文件" class="headerlink" title="站点配置文件"></a>站点配置文件</h4><p>配置文件为根目录的 _config.yml 文件，可以配置博客标题、语言、主题、GitHub 信息等</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="attr">title</span>: <span class="title class_">Kotoba</span></span><br><span class="line"><span class="attr">subtitle</span>: <span class="string">&#x27;技术博客&#x27;</span></span><br><span class="line"><span class="attr">description</span>: <span class="string">&#x27;技术博客网站&#x27;</span></span><br><span class="line"><span class="attr">keywords</span>: <span class="literal">null</span></span><br><span class="line"><span class="attr">author</span>: kotoba</span><br><span class="line"><span class="attr">language</span>: zh-<span class="variable constant_">CN</span></span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<h4 id="主题配置"><a href="#主题配置" class="headerlink" title="主题配置"></a>主题配置</h4><p>安装 Next 主题</p>
+<ul>
+<li><p>npm</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">$ npm install hexo-theme-next@latest</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>git</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">$ git clone <span class="attr">https</span>:<span class="comment">//github.com/next-theme/hexo-theme-next themes/next</span></span><br><span class="line"><span class="comment">// 通过 git 安装要注意看是否为最新版本，建议更新到最新版，git 仓库：https://github.com/next-theme/hexo-theme-next</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>安装完成之后在站点配置文件 _config.yml 应用起来</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="attr">theme</span>: next</span><br></pre></td></tr></table></figure>
+
+<p>主题也有自己的配置文件，比如配置 博客布局、菜单、标签图标等，通过 npm 安装的需要在依赖node_modules里面找到 hexo-theme-next 底下的 _config.yml  配置文件，通过 git 安装的在 themes 文件夹里面找到对应的配置文件</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 布局配置，找到文件里的对应位置，通过配置其他选项来修改博客布局</span></span><br><span class="line"><span class="attr">scheme</span>: <span class="title class_">Gemini</span></span><br><span class="line"><span class="comment">// 配置菜单</span></span><br><span class="line"><span class="attr">menu</span>:</span><br><span class="line"><span class="comment">// 配置头像</span></span><br><span class="line"><span class="attr">avatar</span>:</span><br><span class="line"><span class="comment">// 配置图标链接</span></span><br><span class="line"><span class="attr">social</span>:</span><br><span class="line"><span class="comment">// 配置右上角 GitHub 图标链接</span></span><br><span class="line"><span class="attr">github_banner</span>:</span><br><span class="line"></span><br><span class="line"><span class="comment">// next 主题颜色切换 （增加暗黑主题） https://www.techgrow.cn/posts/abf4aee1.html</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="部署到-GitHub"><a href="#部署到-GitHub" class="headerlink" title="部署到 GitHub"></a>部署到 GitHub</h4><p>新建仓库并把仓库名定义为 xx.github.io（xx为你的GitHub用户名，比如我的 &#x2F;Kotoba209.github.io.git），之后在站点配置文件里面加入 GitHub 信息</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="attr">deploy</span>:</span><br><span class="line">  <span class="attr">type</span>: git</span><br><span class="line">  <span class="attr">repo</span>: git@github.<span class="property">com</span>:<span class="title class_">Kotoba209</span>/<span class="title class_">Kotoba209</span>.<span class="property">github</span>.<span class="property">io</span>.<span class="property">git</span></span><br><span class="line">  <span class="attr">branch</span>: master</span><br></pre></td></tr></table></figure>
+
+<p>执行hexo命令</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo g</span><br><span class="line">hexo s</span><br></pre></td></tr></table></figure>
+
+<p>浏览博客网页 <a href="https://xxx.github.io/">https://xxx.github.io</a> （执行完命令之后，可以到仓库-Settings-Pages 关联到master分支 之后可以在这里看是否更新完成）</p>
+<h4 id="配置插件"><a href="#配置插件" class="headerlink" title="配置插件"></a>配置插件</h4><ul>
+<li><p>字数统计</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">npm install hexo-word-counter</span><br><span class="line"><span class="comment">// 安装之后需要在 next 的主题配置文件配置</span></span><br><span class="line"><span class="attr">symbols_count_time</span>:</span><br><span class="line">  <span class="attr">separated_meta</span>: <span class="literal">true</span></span><br><span class="line">  <span class="attr">item_text_total</span>: <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>远端部署</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install hexo-deployer-git</span><br><span class="line">// 安装之后在站点配置文件</span><br><span class="line"># Deployment</span><br><span class="line">## Docs: https://hexo.io/docs/one-command-deployment</span><br><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repo: git@github.com:Kotoba209/Kotoba209.github.io.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="创建文章"><a href="#创建文章" class="headerlink" title="创建文章"></a>创建文章</h4><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 到本地仓库根目录下执行（blog文件夹）</span></span><br><span class="line">hexo <span class="keyword">new</span> <span class="string">&#x27;name(文章名)&#x27;</span></span><br><span class="line"><span class="comment">// 命令执行后在 blog 文件夹下面的 source - _posts里面看到新建的文件</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h4><ul>
+<li><a href="https://blog.csdn.net/weixin_48927364/article/details/123295436">创建关于、分类、标签等页面</a></li>
+<li><a href="https://blog.csdn.net/yueyue200830/article/details/104470646">博客首页只显示文章部分摘要</a></li>
+</ul>
+<h4 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h4><ul>
+<li><a href="https://blog.0xfaner.site/posts/hexo-next-config/">Hexo 静态博客框架 NexT 主题配置教程</a></li>
+<li><a href="https://theme-next.js.org/docs/getting-started/installation.html#Using-npm">Next安装文档</a></li>
+<li><a href="https://www.techgrow.cn/posts/abf4aee1.html">Next 8.x 主题添加可切换的暗黑模式</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>Utils</category>
+      </categories>
+      <tags>
+        <tag>Utils</tag>
       </tags>
   </entry>
 </search>
